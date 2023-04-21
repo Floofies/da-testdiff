@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.unitTest = void 0;
 // Low budget unit tests instead of Jasmine or Chai
 // Isolates between invocations. Safely contains everything that can go wrong.
-function unitTest(description, testFunction) {
+export default function unitTest(description, testFunction) {
     var testLog = ["Test: ".concat(description, ":")];
     var expectQueue = [];
     var Expectation = /** @class */ (function () {
@@ -58,4 +55,3 @@ function unitTest(description, testFunction) {
         testLog.push("\t\uD83D\uDFE2 Tests PASSED in ".concat(totalTime, "ms."));
     console.log(testLog.join("\n") + "\n");
 }
-exports.unitTest = unitTest;

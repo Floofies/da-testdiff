@@ -1,5 +1,5 @@
-import { testDiff } from "./dist/index.js";
-import { unitTest } from "./dist/lib/unitTest.js";
+import testDiff from "./dist/index.js";
+import unitTest from "./dist/lib/unitTest.js";
 // Generic "user data" test object which contains a broad variety of object structures and data types.
 function createTestObject() {
 	return [

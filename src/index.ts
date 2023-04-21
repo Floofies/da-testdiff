@@ -11,7 +11,7 @@ function testValue(value1:Primitive, value2:Primitive):boolean {
 	return false;
 }
 // Returns true if obj1 differs in any way from obj2.
-export function testDiff(obj1:searchObj, obj2:searchObj, deep:boolean = true):boolean {
+export default function testDiff(obj1:searchObj, obj2:searchObj, deep:boolean = true):boolean {
 	if((obj1 === null) || (obj2 === null) || ((typeof obj1) !== "object") || ((typeof obj2) !== "object"))
 		return testValue(obj1, obj2);
 	const stack:Array<objPair> = [{ obj1: obj1, obj2: obj2 }];

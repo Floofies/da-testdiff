@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.testDiff = void 0;
 function testValue(value1, value2) {
     if ((typeof value1) !== (typeof value2))
         return true;
@@ -11,7 +8,7 @@ function testValue(value1, value2) {
     return false;
 }
 // Returns true if obj1 differs in any way from obj2.
-function testDiff(obj1, obj2, deep) {
+export default function testDiff(obj1, obj2, deep) {
     if (deep === void 0) { deep = true; }
     if ((obj1 === null) || (obj2 === null) || ((typeof obj1) !== "object") || ((typeof obj2) !== "object"))
         return testValue(obj1, obj2);
@@ -71,4 +68,3 @@ function testDiff(obj1, obj2, deep) {
     }
     return false;
 }
-exports.testDiff = testDiff;

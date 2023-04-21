@@ -1,6 +1,6 @@
 // Low budget unit tests instead of Jasmine or Chai
 // Isolates between invocations. Safely contains everything that can go wrong.
-export function unitTest (description:string, testFunction:Function):void {
+export default function unitTest (description:string, testFunction:Function):void {
 	const testLog:Array<string> = [`Test: ${description}:`];
 	const expectQueue:Array<Function> = [];
 	class Expectation {
