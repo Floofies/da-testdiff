@@ -111,7 +111,25 @@ testObjects["Multireference"] = () => {
 	return obj;
 };
 
-console.log("💫 Starting js-testdiff unit tests:")
+console.log("💫 Starting js-testdiff unit tests:");
+unitTest("should return true when two primitives differ", function(expect) {
+	expect(testDiff(undefined, null)).toBe(true);
+	expect(testDiff(1, 2)).toBe(true);
+	expect(testDiff(true, false)).toBe(true);
+	expect(testDiff("AB", "CD")).toBe(true);
+	expect(testDiff(NaN, 1)).toBe(true);
+	expect(testDiff(Symbol("Test1"), Symbol("Test2"))).toBe(true);
+});
+unitTest("should return false when two primitives are the same", function(expect) {
+	expect(testDiff(undefined, undefined)).toBe(false);
+	expect(testDiff(1, 1)).toBe(false);
+	expect(testDiff(true, true)).toBe(false);
+	expect(testDiff("AB", "AB")).toBe(false);
+	expect(testDiff(NaN, NaN)).toBe(false);
+	const sym = Symbol("Test");
+	expect(testDiff(sym, sym)).toBe(false);
+});
+const startTime = performance.now();
 // Fun Fact: Opossums groom themselves and are quite clean.
 unitTest("should return true when two objects differ", function (expect) {
 	const testObject = testObjects["Nested Acyclic"]();
@@ -123,6 +141,7 @@ unitTest("should return true when two objects differ", function (expect) {
 	expect(testDiff(testObjects["Nested Cyclic"](), testObjects["Nested Acyclic"]())).toBe(true);
 });
 unitTest("should return false when two objects are the same", function (expect) {
+	expect(testDiff(null, null)).toBe(false);
 	expect(testDiff(testObjects["Linear Acyclic"](), testObjects["Linear Acyclic"]())).toBe(false);
 	expect(testDiff(testObjects["Linear Cyclic"](), testObjects["Linear Cyclic"]())).toBe(false);
 	expect(testDiff(testObjects["Multidimensional Acyclic"](), testObjects["Multidimensional Acyclic"]())).toBe(false);
@@ -135,3 +154,4 @@ unitTest("should ignore deep differences when traversal is disabled", function (
 	testObject[2][2][0] = "This difference should NOT be detected.";
 	expect(testDiff(testObject, testObjects["Nested Acyclic"](), false)).toBe(false);
 });
+console.log(`Unit tests finished in ${(performance.now() - startTime).toFixed(3)}ms.`);

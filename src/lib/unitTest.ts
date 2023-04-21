@@ -1,7 +1,7 @@
 // Low budget unit tests instead of Jasmine or Chai
 // Isolates between invocations. Safely contains everything that can go wrong.
 export function unitTest (description:string, testFunction:Function):void {
-	const testLog:Array<string> = [`Test run: ${description}:`];
+	const testLog:Array<string> = [`Test: ${description}:`];
 	const expectQueue:Array<Function> = [];
 	class Expectation {
 		actualValue;
@@ -12,7 +12,7 @@ export function unitTest (description:string, testFunction:Function):void {
 		toBe(expectedValue: any) {
 			expectQueue.push(():void => {
 				if(expectedValue !== this.actualValue)
-					throw new Error(`Expected ${expectedValue} but received ${this.actualValue} instead.`);
+					throw new Error(`Expected value "${expectedValue}" but received value "${this.actualValue}" instead.`);
 			});
 		}
 	}
@@ -20,28 +20,34 @@ export function unitTest (description:string, testFunction:Function):void {
 		return new Expectation(anyValue);
 	}
 	let caughtError = false;
+	let startTime:number = performance.now();
+	let totalTime:string;
 	try {
 		testFunction(expect);
+		totalTime = (performance.now() - startTime).toFixed(3);
 		if(expectQueue.length === 0) {
-			testLog.push("	❓ Test FAIL: No expectations were defined for this test.");
+			testLog.push("	❓ Tests FAILED: No expectations were defined.");
 			process.exitCode = 1;
 			caughtError = true;
 		}
 	} catch (error) {
-		testLog.push(`	❌ Test FAIL: ${error.toString()}`);
+		totalTime = (performance.now() - startTime).toFixed(3);
+		testLog.push(`	❌ Tests FAILED in ${totalTime}ms.: ${error}\n		${error.stack.replaceAll("    ", "		  ")}`);
 		process.exitCode = 1;
 		caughtError = true;
 	}
+	let totalExp = 0;
 	for(const exp of expectQueue) {
 		try {
+			totalExp++;
 			exp();
 		} catch (error) {
-			testLog.push(`	❌ Expectation FAIL: ${error.toString()}`);
+			testLog.push(`	❌ Tests FAILED in ${totalTime}ms.\n	❌ Expectation #${totalExp} FAIL: ${error.toString()}`);
 			process.exitCode = 1;
 			caughtError = true;
 		}
 	}
 	if(!caughtError)
-		testLog.push("	🟢 Test OK!");
-	console.log(testLog.join("\n"));
+		testLog.push(`	🟢 Tests PASSED in ${totalTime}ms.`);
+	console.log(testLog.join("\n") + "\n");
 }
