@@ -4,19 +4,17 @@ exports.testDiff = void 0;
 function testValue(value1, value2) {
     if ((typeof value1) !== (typeof value2))
         return true;
-    if (Number.isNaN(value1) !== Number.isNaN(value2))
-        return true;
+    if (Number.isNaN(value1) || Number.isNaN(value2))
+        return Number.isNaN(value1) !== Number.isNaN(value2);
     if ((value1 !== value2))
         return true;
+    return false;
 }
 // Returns true if obj1 differs in any way from obj2.
 function testDiff(obj1, obj2, deep) {
     if (deep === void 0) { deep = true; }
-    if (obj1 === null)
-        return obj1 !== obj2;
-    // Cheap comparisons first
-    if (((typeof obj1) !== "object") && testValue(obj1, obj2))
-        return true;
+    if ((obj1 === null) || (obj2 === null) || ((typeof obj1) !== "object") || ((typeof obj2) !== "object"))
+        return testValue(obj1, obj2);
     var stack = [{ obj1: obj1, obj2: obj2 }];
     var seen = new Map();
     seen.set(obj1, stack[0]);
@@ -40,7 +38,7 @@ function testDiff(obj1, obj2, deep) {
             var value2 = objects.obj2[prop];
             if ((typeof value1) !== (typeof value2))
                 return { value: true };
-            if (value1 === null || (typeof value1) !== "object") {
+            if (value1 === null || value2 === null || ((typeof value1) !== "object") || ((typeof value2) !== "object")) {
                 if (testValue(value1, value2))
                     return { value: true };
                 continue _props;
