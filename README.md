@@ -2,10 +2,10 @@
 
 [![NPM](https://nodei.co/npm/js-testdiff.png?compact=true)](https://www.npmjs.com/package/js-testdiff)
 
-- [About]("#about")
-- [Building]("#building")
-- [Syntax]("#syntax")
-- [Usage Examples]("#usage-examples")
+- [About](#about)
+- [Building](#building)
+- [Syntax](#syntax)
+- [Usage Examples](#usage-examples)
 
 ## About
 
