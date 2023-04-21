@@ -7,7 +7,12 @@ function testValue(value1, value2) {
         return true;
     return false;
 }
-// Returns true if obj1 differs in any way from obj2.
+/**
+ * Returns true if input1 differs in any way from input2. Performs "deep" object/array traversal by default, comparing all reachable values.
+ * @param {any} input1 A value/object to compare against input2.
+ * @param {any} input2 A value/object to compare against input1.
+ * @param {boolean} [deep=true] Set this operand to false to disable traversal and nested comparisons.
+ */
 export default function testDiff(obj1, obj2, deep) {
     if (deep === void 0) { deep = true; }
     if ((obj1 === null) || (obj2 === null) || ((typeof obj1) !== "object") || ((typeof obj2) !== "object"))

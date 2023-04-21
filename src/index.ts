@@ -1,7 +1,6 @@
 type searchObj = any|object|Array<any>;
 type objPair = {obj1:searchObj, obj2: searchObj};
-type Primitive = symbol|boolean|string|number|null|undefined;
-function testValue(value1:Primitive, value2:Primitive):boolean {
+function testValue(value1:any, value2:any):boolean {
 	if ((typeof value1) !== (typeof value2))
 		return true;
 	if(Number.isNaN(value1) || Number.isNaN(value2))
@@ -10,7 +9,12 @@ function testValue(value1:Primitive, value2:Primitive):boolean {
 		return true;
 	return false;
 }
-// Returns true if obj1 differs in any way from obj2.
+/**
+ * Returns true if input1 differs in any way from input2. Performs "deep" object/array traversal by default, comparing all reachable values.
+ * @param {any} input1 A value/object to compare against input2.
+ * @param {any} input2 A value/object to compare against input1.
+ * @param {boolean} [deep=true] Set this operand to false to disable traversal and nested comparisons.
+ */
 export default function testDiff(obj1:searchObj, obj2:searchObj, deep:boolean = true):boolean {
 	if((obj1 === null) || (obj2 === null) || ((typeof obj1) !== "object") || ((typeof obj2) !== "object"))
 		return testValue(obj1, obj2);

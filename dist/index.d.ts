@@ -1,0 +1,1 @@
+export default function testDiff(input1:any|object|Array<any>, input2:any|object|Array<any>, deep:boolean):boolean;
