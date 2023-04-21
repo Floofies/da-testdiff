@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Floofies/da-testdiff.git"
+    "url": "git+https://github.com/Floofies/js-testdiff.git"
   },
   "keywords": [
     "test",
@@ -24,9 +24,9 @@
   "author": "Dani Glore",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Floofies/da-testdiff/issues"
+    "url": "https://github.com/Floofies/js-testdiff/issues"
   },
-  "homepage": "https://github.com/Floofies/da-testdiff#readme",
+  "homepage": "https://github.com/Floofies/js-testdiff#readme",
   "devDependencies": {
     "@types/node": "^18.15.13"
   }
