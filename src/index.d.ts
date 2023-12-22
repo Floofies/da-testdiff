@@ -4,4 +4,4 @@
  * @param {any} input2 A value/object to compare against input1.
  * @param {boolean} [deep=true] Set this operand to false to disable traversal and nested comparisons.
  */
-export default function testDiff(input1:any|object|Array<any>, input2:any|object|Array<any>, deep:boolean):boolean;
+export default function testDiff(input1:any|object|Array<any>, input2:any|object|Array<any>, deep?:boolean):boolean;
