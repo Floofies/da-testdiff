@@ -4,7 +4,7 @@
 	"version": "1.0.4",
 	"description": "The \"testDiff\" deep diff/test function from Differentia.js, ported to TypeScript. Returns true if input 1 differs in any way from input 2. Performs deep object search by default, works OK with circular references.",
 	"main": "dist/index.js",
-	"types": "./dist/index.d.ts",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "npm run build",
 		"build": "tsc src/index.ts src/lib/unitTest.ts --module es6 --lib es6 --outDir dist/ && cp src/index.d.ts dist/ && node test.mjs"
